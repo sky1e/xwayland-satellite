@@ -636,7 +636,7 @@ impl XState {
         let mut known_window_type = false;
         for ty in window_types {
             match ty {
-                x if x == self.window_atoms.normal || x == self.window_atoms.dialog => {
+                x if x == self.window_atoms.normal || x == self.window_atoms.dialog || x == self.window_atoms.drag_n_drop => {
                     is_popup = override_redirect;
                 }
                 x if x == self.window_atoms.menu || x == self.window_atoms.tooltip => {
@@ -923,6 +923,7 @@ xcb::atoms_struct! {
         ty => b"_NET_WM_WINDOW_TYPE" only_if_exists = false,
         normal => b"_NET_WM_WINDOW_TYPE_NORMAL" only_if_exists = false,
         dialog => b"_NET_WM_WINDOW_TYPE_DIALOG" only_if_exists = false,
+        drag_n_drop => b"_NET_WM_WINDOW_TYPE_DND" only_if_exists = false,
         splash => b"_NET_WM_WINDOW_TYPE_SPLASH" only_if_exists = false,
         menu => b"_NET_WM_WINDOW_TYPE_MENU" only_if_exists = false,
         utility => b"_NET_WM_WINDOW_TYPE_UTILITY" only_if_exists = false,
