@@ -1729,6 +1729,25 @@ fn popup_heuristics() {
 }
 
 #[test]
+#[should_panic]
+#[ignore]
+fn consistent_surface_role() {
+    let mut f = Fixture::new();
+    let mut connection = Connection::new(&f.display);
+
+
+    // Regardless of what the correct classification is, it should be consistent
+    // given the same parameters, thus one of the below should be incorrect, and
+    // this test should panic.
+
+    let window = connection.new_window(connection.root, 0, 0, 48, 48, true);
+    f.map_as_toplevel(&mut connection, window);
+
+    let window = connection.new_window(connection.root, 0, 0, 48, 48, true);
+    f.map_as_popup(&mut connection, window);
+}
+
+#[test]
 fn xsettings_scale() {
     let mut f = Fixture::new_preset(|testwl| {
         testwl.new_output(0, 0); // WL-1
